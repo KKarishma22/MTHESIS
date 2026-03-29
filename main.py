@@ -18,7 +18,7 @@ from logging_utils import (
 )
 from trial_logic import run_trial
 from stimuli import Stimuli
-from eeg_et_setup import eeg
+from eeg_setup import eeg
 
 # Logging set up: Demographics + trial + trigger events
 demographics = get_participant_deets()
