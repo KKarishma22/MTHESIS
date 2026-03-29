@@ -540,8 +540,8 @@ def run_trial(
     first_resp, second_resp = trial_type.split(" - ")
     check_quit(win, kb)
      # expected keys
-    expected1 = response_keys[first_resp]                 # always x/m
-    expected2 = response_keys.get(second_resp, None)      # x/m or None (N)
+    expected1 = response_keys[first_resp]                 # always z/x/n/m for R1
+    expected2 = response_keys.get(second_resp, None)      # z/x/n/m  or None (N)
 
     # trial clock: will be reset to 0 exactly on the cue-onset flip
     trial_clock = core.Clock()
