@@ -94,8 +94,8 @@ def delay(
             stim_draw()
         fixation.draw()
         win.flip()  # fixation stays visible because autoDraw=True
-        win.getMovieFrame()
-        win.saveMovieFrames("cue.png")
+        #win.getMovieFrame()
+        #win.saveMovieFrames("cue.png")
     
     return {"Premature press": premature, "key": pressed_key, "correct": premature_correct}
 
@@ -210,8 +210,8 @@ def run_response_period(
                 fixation.draw()
             vpb_outline.draw()
             win.flip()
-            win.getMovieFrame()
-            win.saveMovieFrames("response_period_none.png")
+            #win.getMovieFrame()
+            #win.saveMovieFrames("response_period_none.png")
         
             
     
@@ -279,8 +279,8 @@ def run_response_period(
                 fixation.draw()
             vpb_outline.draw()
             win.flip()
-            win.getMovieFrame()
-            win.saveMovieFrames("penalty1.png")
+            #win.getMovieFrame()
+            #win.saveMovieFrames("penalty1.png")
         
         if fixation is not None:
             fixation.color = 'black'  # reset fixation color after penalty
@@ -354,8 +354,8 @@ def run_response_period(
                 fixation.draw()
             vpb_outline.draw() #draw an empty outline to show the missed response
             win.flip()
-            win.getMovieFrame()
-            win.saveMovieFrames("missed_deadline.png")
+            #win.getMovieFrame()
+            #win.saveMovieFrames("missed_deadline.png")
             continue
         # Correct press starts the hold period
         presses = kb.getKeys (waitRelease=False, clear=True)
@@ -449,8 +449,8 @@ def run_response_period(
                 vpb_fill.draw()
                 vpb_outline.draw()
                 win.flip()
-                win.getMovieFrame()
-                win.saveMovieFrames("success.png")
+                #win.getMovieFrame()
+                #win.saveMovieFrames("success.png")
 
                 # waits for key release to send resp_end trigger
                 if trigger_ctx is not None:
@@ -508,8 +508,8 @@ def run_response_period(
                 if fixation is not None:
                     fixation.color = "black"
                 win.flip()
-                win.getMovieFrame()
-                win.saveMovieFrames("early_release.png")
+                #win.getMovieFrame()
+                #win.saveMovieFrames("early_release.png")
 
                 result["outcome"] = 0
                 result["err_early_release"] = 1
