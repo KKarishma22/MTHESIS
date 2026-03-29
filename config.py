@@ -6,9 +6,24 @@ import random
 study_id = "ActionPlanExec"
 # Trial and block structure
 blocks = 2       #whatever number of blocks we want
-trials_per_block = 6 #whatever number of trials per block we want
-trial_types = ["L - L", "L - R", "R - L", "R - R", "R - N", "L - N"]
-
+trials_per_block = 16 #whatever number of trials per block we want
+trial_types = ["L1 - L2", 
+               "L1 - R1", 
+               "L1 - R2", 
+               "L1 - N",
+               "L2 - L1", 
+               "L2 - R1", 
+               "L2 - R2", 
+               "L2 - N",
+               "R1 - R2", 
+               "R1 - L1", 
+               "R1 - L2", 
+               "R1 - N",
+               "R2 - R1", 
+               "R2 - L1", 
+               "R2 - L2", 
+               "R2 - N"]
+               
 # Timings 
 stim_duration = .500 
 delay_duration = 1.500
@@ -18,7 +33,8 @@ max_time = 2.000
 ease_power = 2.0
 
 # Response keys
-response_keys = {'L': 'x', 'R': 'm'}
+response_keys = {'L1': 'x', 'R1': 'n',
+                 'L2': 'z', 'R2': 'm'}
 
 # Messages
 messages = {
@@ -59,13 +75,25 @@ messages = {
 }
 
 Cond_code = {
-    "L - L": 1,
-    "L - R": 2,
-    "L - N": 3,
-    "R - R": 4,
-    "R - L": 5,
-    "R - N": 6
-}
+               "L1 - L2": 1, 
+               "L1 - R1": 2, 
+               "L1 - R2": 3, 
+               "L1 - N": 4,
+               "L2 - L1": 5, 
+               "L2 - R1": 6, 
+               "L2 - R2": 7, 
+               "L2 - N": 8,
+               "R1 - R2": 9, 
+               "R1 - L1": 10, 
+               "R1 - L2": 11, 
+               "R1 - N": 12,
+               "R2 - R1": 13, 
+               "R2 - L1": 14, 
+               "R2 - L2": 15, 
+               "R2 - N": 16
+               }
+
+
 
 TRIAL_FIELDS = [
     #"Study_ID", "Subject_ID", "Date",
