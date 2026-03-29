@@ -151,13 +151,13 @@ demographics_fields = [
 ]
 
 EVENT_OFFSET= {
-    "cue" : 10,
-    "resp_screen1" : 20,
-    "resp1_start" : 30,
-    "resp1_end" : 40,
-    "resp_screen2" : 50,
-    "resp2_start" : 60,
-    "resp2_end" : 70,
+    "cue" : 20,
+    "resp_screen1" : 40,
+    "resp1_start" : 60,
+    "resp1_end" : 80,
+    "resp_screen2" : 100,
+    "resp2_start" : 120,
+    "resp2_end" : 140,
 }
 TRIGGER_FIELDS = [
     "Block", "Trial", "Trial_global", "Cond_code",
