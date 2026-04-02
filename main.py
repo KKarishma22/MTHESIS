@@ -28,7 +28,7 @@ session_start = demographics["Session_start"]
 data_folder = make_data_folder(subjID)
 
 # Window + Keyboard config
-win = visual.Window(size=(800,600),fullscr=False, color='white', screen=0, units='pix')
+win = visual.Window(size=(800,600),fullscr=True, color='white', screen=0, units='pix')
 mouse = event.Mouse(visible=False, win=win)
 mouse.setVisible(False)
 kb = keyboard.Keyboard()
