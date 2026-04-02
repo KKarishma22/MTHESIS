@@ -23,13 +23,18 @@ trial_types = ["L1 - L2",
                "R2 - L1", 
                "R2 - L2", 
                "R2 - N"]
+#colour and text mappings for trial types
+text_map  = {"L1": "L", "L2": "L", "R1": "R", "R2": "R", "N": "N"}
+color_map = {"L1": "purple", "L2": "teal", "R1": "purple", "R2": "teal", "N": "black"}
+
                
 # Timings 
 stim_duration = .500 
 delay_duration = 1.500
+no_delay = 0.000
 iti_range = (0.500, 1.000)
-hold_required= 1.000
-max_time = 2.000
+hold_required= 2.000
+max_time = 3.000
 ease_power = 2.0
 
 # Response keys

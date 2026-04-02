@@ -5,7 +5,7 @@ from psychopy import core
 
 from constant_utils import to_ms, check_quit, run_iti
 from triggers import send_trigger_and_log, trigger_on_flip, pending_resp_end, WAITING_RESP_END
-from config import (response_keys, stim_duration, delay_duration, iti_range, hold_required, max_time, ease_power, Cond_code)
+from config import (response_keys, stim_duration, delay_duration, no_delay, iti_range, hold_required, max_time, ease_power, Cond_code, color_map, text_map)
 
 
 def delay(
@@ -547,8 +547,10 @@ def run_trial(
     trial_clock = core.Clock()
     
     # 1) stimulus + delay 1
-    stim_top.text = first_resp
-    stim_bottom.text = second_resp
+    stim_top.text = text_map[first_resp]
+    stim_top.color= color_map[first_resp]
+    stim_bottom.text = text_map[second_resp]
+    stim_bottom.color= color_map[second_resp]
 
     def stim_draw():
         stim_top.draw()
@@ -593,7 +595,7 @@ def run_trial(
     # 4) delay 2
     
     prem2 = delay(
-        win=win, fixation=fixation, kb=kb, duration=delay_duration, 
+        win=win, fixation=fixation, kb=kb, duration=no_delay, 
         expected_key=expected2, block_start_box=block_start_box,
         exp_clock=exp_clock, trial_clock=trial_clock,
         trial_type=trial_type, 

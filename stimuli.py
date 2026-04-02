@@ -14,5 +14,3 @@ class Stimuli:
         self.message_stim = visual.TextStim(win, text="", color='black', height=28, wrapWidth=1000)
         self.vpb_outline = visual.Rect( win, width=65, height=220, lineColor='black', fillColor=None, lineWidth=3, pos=(0, 0))
         self.vpb_fill = visual.Rect( win, width=60, height=0, fillColor='gray', lineColor=None, pos=(0, 0))
-
-        
