@@ -20,14 +20,14 @@ from trial_logic import run_trial
 from stimuli import Stimuli
 from eeg_setup import eeg
 
-# Logging set up: Demographics + trial + trigger events
+# Logging 
 demographics = get_participant_deets()
 subjID = demographics["subjID"]
 date_str = demographics["Date"]
 session_start = demographics["Session_start"]
 data_folder = make_data_folder(subjID)
 
-# Window + Keyboard config
+# Window 
 win = visual.Window(size=(800,600),fullscr=False, color='white', screen=0, units='pix')
 mouse = event.Mouse(visible=False, win=win)
 mouse.setVisible(False)
@@ -50,34 +50,25 @@ trigger_fh, trigger_writer = create_trigger_writer(data_folder, study_id, subjID
 enable_eeg = False # when running exp in lab, change 
 EEG, port =  eeg(enable_eeg=enable_eeg)
 
-# Eye tracker set up (EyeLink)
-# ── toggle this when moving between desk and lab ──────────────────────────
-enable_et = False   # False → no hardware needed; True → connect to EyeLink
-# ──────────────────────────────────────────────────────────────────────────
-
+# Eye tracker set up
+enable_et = False  
 ET = False          # will be set True only if hardware connects successfully
 et = None           # the EyeLinker object (ConnectedEyeLinker or MockEyeLinker)
 
 if enable_et:
     try:
-        # EDF filename on the HOST PC: max 12 characters INCLUDING ".edf"
         safe = "".join(ch for ch in str(subjID) if ch.isalnum())
         host_edf = (safe[-8:] if safe else "S0000000") + ".edf"   
-
-        # EyeLinker() shows a "not connected" screen if no tracker is found.
-        # The user can press R to retry, D for debug/mock mode, or Q to quit.
         et = eyelinker.EyeLinker(window=win, filename=host_edf, eye="RIGHT")
-
-        # Full init sequence (graphics → open EDF → tracker settings → tracking settings)
+        
         et.init_tracker()
 
-        # Start recording immediately; a short delay is built into start_recording()
+        # Start recording immediately
         et.start_recording()
         # ensure that mouse is invisible and key presses are registered during calibration when in fullscreen mode
         win.winHandle.activate()
         #win.flip()
 
-        # ET=True only for a real (non-mock) connection
         ET = (et is not None) and (not getattr(et, "mock", False))
         logging.info(f"EyeLink ready. ET={ET}, EDF={host_edf}")
 
@@ -249,18 +240,18 @@ finally:
     try:
         if et is not None and (not getattr(et, "mock", False)):
             try:
-                et.stop_recording()    # required delay included :contentReference[oaicite:8]{index=8}
+                et.stop_recording()   
             except Exception:
                 pass
 
             try:
-                et.close_edf()         # closes host EDF :contentReference[oaicite:9]{index=9}
+                et.close_edf()         
             except Exception:
                 pass
 
             # Transfer EDF from host to stimulus PC (can be long path/filename)
             try:
-                et.transfer_edf(os.path.join(data_folder, f"et_{subjID}.edf"))  # must end with .edf :contentReference[oaicite:10]{index=10}
+                et.transfer_edf(os.path.join(data_folder, f"et_{subjID}.edf")) 
             except Exception as e:
                 logging.warning(f"EDF transfer failed: {e}")
 
