@@ -1,5 +1,5 @@
 """
-All configuration for the experiment.
+Stuff like trial details, logging details, stimulus details :)
 """
 import random
 
