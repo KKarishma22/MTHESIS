@@ -3,7 +3,7 @@ import random
 import logging
 from triggers import pending_resp_end
 
-# ====================== QUIT HANDLING ====================== #
+# Handling quitting the experiment
 #quit_requested = False
 #def request_quit()
 #    global quit_requested
@@ -23,25 +23,14 @@ def check_quit(win, kb):
 
 #event.globalKeys.clear()
 #event.globalKeys.add(key='escape', func=request_quit)
-# ====================== FUNCTIONS ====================== #
+
+# Functions that aren't directly related to the displaying and engaging with the task
 # Clock and timing
 def to_ms(clock_or_sec, sec=None):
-    """
-    Convert seconds -> integer milliseconds.
-
-    Accepts either:
-      - a PsychoPy Clock-like object (has .getTime()), OR
-      - a numeric seconds value, OR
-      - a Timestamp-like object.
-    """
     if sec is None:
         x = clock_or_sec
-
-        # If it's a Clock, get the time first
         if hasattr(x, "getTime"):
             x = x.getTime()
-
-        # PsychoPy Timestamp often exposes .time
         if hasattr(x, "time"):
             x = x.time
         # Pandas Timestamp exposes .timestamp()
@@ -59,7 +48,7 @@ def to_ms(clock_or_sec, sec=None):
 
 
 def clock_ms(clock):
-    """For trial-relative timings."""
+    """For logging timings relative to trial start."""
     t = clock.getTime()
     if hasattr(t, "time"):
         t = t.time
@@ -185,13 +174,13 @@ def create_block(trial_types, trials_per_block, rng=random):
     rng.shuffle(block_list)
     return block_list
 
-# Running ITI also polling for presses and logging
+# Running ITI also polling for participant presses and logs them
 def run_iti(win, kb, duration, fixation=None): 
     """ 
     Runs an ITI period that monitors and logs any key presses
     Shows fixation during the ITI
 
-    Returns a dict with both raw and compact logs
+    Returns a dict with what key was pressed and when during the ITI
     """
     kb.clearEvents()
     iti_clock = core.Clock()
@@ -200,7 +189,7 @@ def run_iti(win, kb, duration, fixation=None):
     win.flip()  # ensure any previous stimuli are cleared and we start with a fresh screen for the ITI
 
     while iti_clock.getTime() < duration:
-        # check for resp_end and send trigger
+        # check for resp_end and send trigger (because it could be that pp releases second response key press during ITI)
         pending_resp_end(kb)
         # poll first so an Escape press can be logged before quitting
         presses = kb.getKeys(waitRelease=False, clear=True)
@@ -209,8 +198,8 @@ def run_iti(win, kb, duration, fixation=None):
             for p in presses:
                 events.append({
                     "t_ms": t_ms,
-                    "name": p.name,                    # can be None
-                    "code": getattr(p, "code", None)    # fallback for unknown keycodes
+                    "name": p.name,                    
+                    "code": getattr(p, "code", None)    
                 })
                   # indicate key press during ITI with red fixation   
 
